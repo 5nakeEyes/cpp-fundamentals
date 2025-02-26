@@ -21,4 +21,5 @@ std::string calculate(const std::string& command, int first, int second) {
   	default:
     		return "Invalid data";
     }
+	return "Invalid data";
 }
