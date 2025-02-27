@@ -1,8 +1,15 @@
 #pragma once
 
 int fibonacci_iterative(int sequence) {
-    // TODO: Your implementation goes here
-    return 0;
+    if (sequence <= 1)
+        return sequence;
+    int first = 0, second = 1, sum = 0;
+    for (int i = 2; i <= sequence; i++) {
+        sum = first + second;
+        first = second;
+        second = sum;
+    }
+    return sum;
 }
 
 int fibonacci_recursive(int sequence) {
