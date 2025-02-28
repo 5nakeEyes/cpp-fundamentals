@@ -28,4 +28,3 @@ int NWW(int lhs, int rhs) {
         rhs *= -1;
     return lhs * rhs / NWD(lhs, rhs);
 }
-
