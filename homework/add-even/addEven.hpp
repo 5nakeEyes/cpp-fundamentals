@@ -8,6 +8,5 @@ int addEven(const std::vector<int>& numbers) {
         if (el % 2 == 0)
             result += el;
     }
-    
     return result;
 }
