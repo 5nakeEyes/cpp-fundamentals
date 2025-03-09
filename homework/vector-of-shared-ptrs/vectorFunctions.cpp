@@ -19,3 +19,7 @@ void add10(std::vector<std::shared_ptr<int>> vector) {
 	for (auto element : vector)
 		*element += 10;
 }
+
+void sub10(int* const element) {
+	*element -= 10;
+}
