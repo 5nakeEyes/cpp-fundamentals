@@ -10,16 +10,21 @@ std::vector<std::shared_ptr<int>> generate(int count) {
 	return vec;
 }
 
-void print(std::vector<std::shared_ptr<int>> vector) {
-	for(auto element : vector)
+void print(std::vector<std::shared_ptr<int>> vec) {
+	for(auto element : vec)
 		std::cout << *element << " ";
 }
 
-void add10(std::vector<std::shared_ptr<int>> vector) {
-	for (auto element : vector)
+void add10(std::vector<std::shared_ptr<int>> vec) {
+	for (auto element : vec)
 		*element += 10;
 }
 
 void sub10(int* const element) {
 	*element -= 10;
+}
+
+void sub10(std::vector<std::shared_ptr<int>> vec) {
+	for (auto element : vec)
+		sub10(element.get());
 }
