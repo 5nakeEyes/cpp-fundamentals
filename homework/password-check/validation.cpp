@@ -6,27 +6,37 @@
 std::string getErrorMessage(ErrorCode code) {
     std::string msg = "";
     switch (code) {
-    case ErrorCode::Ok: msg = "Ok\n";   
+    case ErrorCode::Ok: msg = "Ok";   
         break;
-    case ErrorCode::PasswordNeedsAtLeastNineCharacters: msg = "Error: Password needs at least nine characters\n";
+    case ErrorCode::PasswordNeedsAtLeastNineCharacters: msg = "Password needs to have at least nine characters";
         break;
-    case ErrorCode::PasswordNeedsAtLeastOneNumber: msg = "Error: Password needs at least one number\n";
+    case ErrorCode::PasswordNeedsAtLeastOneNumber: msg = "Password needs to have at least one number";
         break;
-    case ErrorCode::PasswordNeedsAtLeastOneSpecialCharacter: msg = "Error: Password needs at least one special character\n";
+    case ErrorCode::PasswordNeedsAtLeastOneSpecialCharacter: msg = "Password needs to have at least one special character";
         break;
-    case ErrorCode::PasswordNeedsAtLeastOneUppercaseLetter: msg = "Error: Password needs at least one uppercase letter\n";
+    case ErrorCode::PasswordNeedsAtLeastOneUppercaseLetter: msg = "Password needs to have at least one uppercase letter";
         break;
-    case ErrorCode::PasswordsDoNotMatch: msg = "Error: Passwords do not match\n";
+    case ErrorCode::PasswordsDoNotMatch: msg = "Passwords do not match";
         break;
     default: msg = "Unknown error!";
     };
     return msg;
 }
 
-bool doPasswordsMatch(std::string passwordLeft, std::string passwordRight) {
-    if (passwordLeft == "" || passwordRight == "") return false;
-    if (passwordLeft == passwordRight) return true;
-    else return false;
+bool doPasswordsMatch(std::string passwordLeft, std::string passwordRight)
+{
+    if (passwordLeft.length() == passwordRight.length())
+    {
+        if (passwordLeft == "") return true;
+        for (int i = 0; i < passwordLeft.length(); i++)
+        {
+            if (passwordLeft[i] != passwordRight[i])
+                return false;
+            else
+                return true;
+        }
+    }
+    return false;
 }
 
 ErrorCode checkPasswordRules(std::string password) {
@@ -47,4 +57,13 @@ ErrorCode checkPasswordRules(std::string password) {
         break;
     }
     return code;
+}
+
+ErrorCode checkPassword(std::string password, std::string secondPassword) {
+    ErrorCode resultCode = ErrorCode::PasswordsDoNotMatch;
+    if (!doPasswordsMatch(password, secondPassword))
+        resultCode = ErrorCode::PasswordsDoNotMatch;
+    else
+        resultCode = checkPasswordRules(password);
+    return resultCode;
 }
