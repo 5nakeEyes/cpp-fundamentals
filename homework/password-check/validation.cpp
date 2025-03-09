@@ -19,3 +19,9 @@ std::string getErrorMessage(ErrorCode code) {
     };
     return msg;
 }
+
+bool doPasswordsMatch(std::string passwordLeft, std::string passwordRight) {
+    if (passwordLeft == "" || passwordRight == "") return false;
+    if (passwordLeft == passwordRight) return true;
+    else return false;
+}
