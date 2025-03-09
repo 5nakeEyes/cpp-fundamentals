@@ -1,4 +1,7 @@
 #include "validation.hpp"
+#include <cstdlib>
+#include <ctime>
+
 
 std::string getErrorMessage(ErrorCode code) {
     std::string msg = "";
@@ -24,4 +27,24 @@ bool doPasswordsMatch(std::string passwordLeft, std::string passwordRight) {
     if (passwordLeft == "" || passwordRight == "") return false;
     if (passwordLeft == passwordRight) return true;
     else return false;
+}
+
+ErrorCode checkPasswordRules(std::string password) {
+    srand(time(0));
+    int randomNumber = random() % 5;
+    ErrorCode code = ErrorCode::Ok;
+
+    switch (randomNumber) {
+    case 1: code = ErrorCode::Ok;
+        break;
+    case 2: code = ErrorCode::PasswordNeedsAtLeastNineCharacters;
+        break;
+    case 3 : code = ErrorCode::PasswordNeedsAtLeastOneNumber;
+        break;
+    case 4 : code = ErrorCode::PasswordNeedsAtLeastOneSpecialCharacter;
+        break;
+    case 5 : code = ErrorCode::PasswordNeedsAtLeastOneUppercaseLetter;
+        break;
+    }
+    return code;
 }
