@@ -1,6 +1,13 @@
 #include "validation.hpp"
-#include <cstdlib>
-#include <ctime>
+#include <algorithm>
+
+bool isspecial(char character) {
+    std::string specialCharacters = "!@#$%^&*-_+=";
+    for (int i = 0; i < specialCharacters.size(); i++)
+        if (character == specialCharacters[i])
+            return true;
+    return false;
+}
 
 std::string getErrorMessage(ErrorCode code) {
     std::string msg = "";
@@ -44,27 +51,15 @@ bool doPasswordsMatch(std::string passwordLeft, std::string passwordRight) {
 }
 
 ErrorCode checkPasswordRules(std::string password) {
-    srand(time(0));
-    int randomNumber = random() % 5;
     ErrorCode code = ErrorCode::Ok;
-
-    switch (randomNumber) {
-    case 1:
-        code = ErrorCode::Ok;
-        break;
-    case 2:
+    if (password.length() < 9)
         code = ErrorCode::PasswordNeedsAtLeastNineCharacters;
-        break;
-    case 3:
+    else if (std::none_of(password.begin(), password.end(), isdigit))
         code = ErrorCode::PasswordNeedsAtLeastOneNumber;
-        break;
-    case 4:
+    else if (std::none_of(password.begin(), password.end(), isspecial))
         code = ErrorCode::PasswordNeedsAtLeastOneSpecialCharacter;
-        break;
-    case 5:
+    else if (std::none_of(password.begin(), password.end(), isupper))
         code = ErrorCode::PasswordNeedsAtLeastOneUppercaseLetter;
-        break;
-    }
     return code;
 }
 
