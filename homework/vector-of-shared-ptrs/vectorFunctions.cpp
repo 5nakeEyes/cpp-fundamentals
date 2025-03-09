@@ -1,3 +1,6 @@
+#include <vector>
+#include <memory>
+#include <iostream>
 std::vector<std::shared_ptr<int>> generate(int count) {
 	std::vector<std::shared_ptr<int>> vec;
 	for (int i = 0; i < count; i++) {
@@ -5,4 +8,9 @@ std::vector<std::shared_ptr<int>> generate(int count) {
 		vec.push_back(ptr);
 	}
 	return vec;
+}
+
+void print(std::vector<std::shared_ptr<int>> vector) {
+	for(auto element : vector)
+		std::cout << *element << " ";
 }

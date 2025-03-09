@@ -3,3 +3,4 @@
 #include <memory>
 
 std::vector<std::shared_ptr<int>> generate(int);
+void print(std::vector<std::shared_ptr<int>>);
